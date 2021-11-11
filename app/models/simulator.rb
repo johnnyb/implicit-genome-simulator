@@ -22,12 +22,16 @@ class Simulator
 			self.organisms.push(o)
 		end
 		self.current_environment = environments.shuffle.first
+
+		return self
 	end
 
 	def run_until!(iteration)
 		while timestamp < iteration
 			iterate!
 		end
+
+		return self
 	end
 
 	def iterate!

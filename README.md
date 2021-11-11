@@ -1,24 +1,20 @@
-# README
+# The Implicit Genome Simulator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The goal of this app is to do a population simulator based roughly on ideas from the book "The Implicit Genome".
+Essentially, genomes have an implicit range and high parameterization.  Therefore, mutations aren't "random"
+in the sense of the modern synthesis, but only "randomized".  The goal is to look at population dynamics
+under this condition.
 
-Things you may want to cover:
+## Running
 
-* Ruby version
+The easiest way to run this is:
 
-* System dependencies
+```
+rails console
+s = Simulator.new.reset.run_until!(5)
+s.organisms.size
+```
 
-* Configuration
+This will tell you how many organisms remain after 5 iterations.
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
