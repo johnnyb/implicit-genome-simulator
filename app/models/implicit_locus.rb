@@ -28,6 +28,7 @@ class ImplicitLocus
 
 			when :discrete
 				self.range = (Environment.rnd.rand * 50).to_i
+				self.range = 2 if self.range < 2
 
 			when :continuous
 				self.range = 1.0
