@@ -12,15 +12,22 @@ class Simulator
 		self.timestamp = 0
 		self.implicit_genome = ImplicitGenome.new(num_loci)
 		self.environments = []
+		self.organisms = []
 		1.upto(num_environments) do
 			e = Environment.new(implicit_genome)
 			self.environments.push(e)
 		end
-		1.upto(num_organisms) do
+		1.upto(num_starting_organisms) do
 			o = Organism.new(implicit_genome)
 			self.organisms.push(o)
 		end
 		self.current_environment = environments.shuffle.first
+	end
+
+	def run_until!(iteration)
+		while timestamp < iteration
+			iterate!
+		end
 	end
 
 	def iterate!
@@ -29,6 +36,7 @@ class Simulator
 		organisms.each do |o|
 			next_organism_batch += o.iterate(current_environment)
 		end
+		self.organisms = next_organism_batch
 		change_environment!
 	end
 
@@ -40,8 +48,9 @@ class Simulator
 
 	def initialize
 		self.timestamp = 0
-		self.num_environments = 50
-		self.num_loci = 100
+		self.num_environments = 1
+		self.num_loci = 20
+		self.num_starting_organisms = 20
 		self.implicit_genome = nil
 		self.current_environment = nil
 		self.environments = []

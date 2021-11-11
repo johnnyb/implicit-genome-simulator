@@ -2,9 +2,13 @@ class Locus
 	attr_accessor :implicit_locus
 	attr_accessor :value
 
-	def initialize(ilocus)
+	def initialize(ilocus, new_value = nil)
 		self.implicit_locus = ilocus
-		self.value = self.implicit_locus.generate_value
+		self.value = new_value || self.implicit_locus.generate_value 
+	end
+
+	def duplicate
+		Locus.new(implicit_locus, value)
 	end
 
 	def possibly_mutate!

@@ -2,11 +2,13 @@ class Organism
 	attr_accessor :implicit_genome
 	attr_accessor :loci
 
-	def initialize(igenome)
-		tmp_loci = []
+	def initialize(igenome, tmp_loci = nil)
 		self.implicit_genome = igenome
-		igenome.implicit_loci.each do |ilocus|
-			tmp_loci.push(Locus.new(ilocus))
+		if tmp_loci.nil?	
+			tmp_loci = []
+			igenome.implicit_loci.each do |ilocus|
+				tmp_loci.push(Locus.new(ilocus))
+			end
 		end
 		self.loci = tmp_loci
 	end
@@ -26,6 +28,11 @@ class Organism
 
 	# Duplicate myself and return a new organism
 	def duplicate
+		new_loci = []
+		self.loci.each do |locus|
+			new_loci.push(locus.duplicate)
+		end
+		o = Organism.new(implicit_genome, new_loci)
 	end
 
 	# Modify my current genome
