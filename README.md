@@ -1,20 +1,7 @@
 # The Implicit Genome Simulator
 
-The goal of this app is to do a population simulator based roughly on ideas from the book "The Implicit Genome".
-Essentially, genomes have an implicit range and high parameterization.  Therefore, mutations aren't "random"
-in the sense of the modern synthesis, but only "randomized".  The goal is to look at population dynamics
-under this condition.
+If you got here from the paper "Alternate mutation modalities in models of population dynamics", that was due to a typo on my part.  This was a previous version of the project that went unfinished.  The actual URL for the project is:
 
-## Running
+https://github.com/johnnyb/implicit-genome-simulator-go
 
-The easiest way to run this is:
-
-```
-rails console
-s = Simulator.new.reset.run_until!(5)
-s.organisms.size
-```
-
-This will tell you how many organisms remain after 5 iterations.
-
-
+Sorry for the inconvenience.
