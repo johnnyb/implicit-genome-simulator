@@ -14,7 +14,7 @@ type Simulator struct {
 	MaxOrganisms   int
 	Time           int
 	NeutralRange   float32
-	DataStream     io.WriteCloser
+	DataStream     io.Writer
 	DataLogger     func(sim *Simulator, metric Metric, value interface{})
 	Logger         func(sim *Simulator, message string)
 }
@@ -138,8 +138,9 @@ func (rec *Simulator) Initialize() {
 
 func (rec *Simulator) Finish() {
 	rec.DataLog(SIMULATION_COMPLETE, nil)
-	err := rec.DataStream.Close()
-	if err != nil {
-		rec.Log("Error closing datafile: " + err.Error())
+	if c, ok := rec.DataStream.(io.Closer); ok {
+		if err := c.Close(); err != nil {
+			rec.Log("Error closing datafile: " + err.Error())
+		}
 	}
 }
