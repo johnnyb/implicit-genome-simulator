@@ -2,6 +2,8 @@ package datalogging
 
 import (
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/johnnyb/implicit-genome-simulator-go/simulator"
 )
@@ -19,7 +21,7 @@ func DataLogBeneficialMutations(sim *simulator.Simulator, metric simulator.Metri
 		currentEnvironment = value.(*simulator.Environment)
 	case simulator.ENVIRONMENT_COMPLETE:
 	case simulator.SIMULATION_START:
-		sim.DataLogOutput(fmt.Sprintf("Generation,Environment,# Organisms Mutated,B/D Ratio,Fitness,SEED:%d\n", simulator.RandomSeed))
+		sim.DataLogOutput(fmt.Sprintf("Generation,Environment,# Organisms Mutated,B/D Ratio,Fitness,SEED:%d,CMD:%s\n", simulator.RandomSeed, strings.Join(os.Args, " ")))
 	case simulator.ORGANISM_MUTATIONS_BENEFICIAL:
 		if value.(bool) {
 			beneficialCount += 1
